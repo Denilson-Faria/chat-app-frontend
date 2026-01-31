@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Clock, Heart, Sparkles, Loader2 } from 'lucide-react';
-import api from '../../services/api'; 
+import api from '../../services/api';
 
 const StickerPicker = ({ onSelectSticker, onClose }) => {
   const [activeCategory, setActiveCategory] = useState('ainnn');
@@ -30,25 +30,28 @@ const StickerPicker = ({ onSelectSticker, onClose }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [onClose]);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const fetchPackFromBackend = async () => {
     try {
- 
-      const res = await api.get('/stickers');
+      const res = await api.get("/stickers");
       const urls = res.data;
-      
+
       return urls.map(url => ({
-        file_id: url, 
-        url: `http://localhost:5000${url}`, 
-        thumb: `http://localhost:5000${url}` 
+        file_id: url,
+        url: url.startsWith("http") ? url : `${API_URL}${url}`,
+        thumb: url.startsWith("http") ? url : `${API_URL}${url}`
       }));
     } catch (err) {
+      console.error("Erro ao buscar stickers:", err);
       return [];
     }
   };
 
+
   const loadStickers = async (categoryId) => {
     if (stickers[categoryId]) return;
-    
+
     setLoading(true);
     const packStickers = await fetchPackFromBackend();
     setStickers(prev => ({ ...prev, [categoryId]: packStickers }));
@@ -63,11 +66,11 @@ const StickerPicker = ({ onSelectSticker, onClose }) => {
 
 
   const handleStickerClick = (sticker) => {
-   
+
     onSelectSticker({
       type: 'sticker',
-      url: sticker.url,  
-      stickerUrl: sticker.url, 
+      url: sticker.url,
+      stickerUrl: sticker.url,
       text: ''
     });
 
@@ -108,11 +111,10 @@ const StickerPicker = ({ onSelectSticker, onClose }) => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`p-2 rounded-lg transition ${
-                activeCategory === cat.id
+              className={`p-2 rounded-lg transition ${activeCategory === cat.id
                   ? 'bg-blue-100 dark:bg-blue-900 text-blue-600'
                   : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400'
-              }`}
+                }`}
               title={cat.label}
             >
               <Icon size={20} />
@@ -133,8 +135,8 @@ const StickerPicker = ({ onSelectSticker, onClose }) => {
             <div className="text-center">
               <Sparkles size={48} className="mx-auto mb-2 opacity-50" />
               <p className="text-sm">
-                {activeCategory === 'recent' 
-                  ? 'Nenhum sticker recente' 
+                {activeCategory === 'recent'
+                  ? 'Nenhum sticker recente'
                   : 'Nenhuma figurinha disponível'}
               </p>
             </div>

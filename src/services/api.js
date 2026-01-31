@@ -1,7 +1,14 @@
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+if (!API_URL) {
+  console.warn("⚠️ VITE_API_URL não definida");
+}
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+  baseURL: `${API_URL}/api`,
+  withCredentials: true
 });
 
 api.interceptors.request.use(config => {

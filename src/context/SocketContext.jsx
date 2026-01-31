@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useRef } from 'react';
-import io from 'socket.io-client';
+import { io } from "socket.io-client";
 
 const SocketContext = createContext();
 
@@ -38,22 +38,27 @@ export const SocketProvider = ({ children }) => {
 
     isConnecting.current = true;
 
-    const newSocket = io('http://localhost:5000', {
-      auth: {
-        token: token
-      },
-      transports: ['websocket', 'polling'],
-      upgrade: true,
-      autoConnect: true,
-      reconnection: true,
-      reconnectionDelay: 2000,
-      reconnectionDelayMax: 10000,
-      reconnectionAttempts: 5,
-      timeout: 20000,
-      forceNew: false,
-      multiplex: true,
-      withCredentials: true
-    });
+  
+
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL;
+
+const newSocket = io(SOCKET_URL, {
+  auth: {
+    token
+  },
+  transports: ["websocket", "polling"],
+  upgrade: true,
+  autoConnect: true,
+  reconnection: true,
+  reconnectionDelay: 2000,
+  reconnectionDelayMax: 10000,
+  reconnectionAttempts: 5,
+  timeout: 20000,
+  forceNew: false,
+  multiplex: true,
+  withCredentials: true
+});
+
 
     const handleConnect = () => {
       setConnected(true);
