@@ -1,0 +1,80 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="30%" stop-color="#8B5CF6"/>
+      <stop offset="60%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <linearGradient id="bubbleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5F3FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background com gradiente -->
+  <rect width="512" height="512" rx="115" fill="url(#mainGradient)"/>
+  
+  <!-- Glow effect background -->
+  <circle cx="150" cy="150" r="100" fill="#A855F7" opacity="0.3" filter="url(#glow)"/>
+  <circle cx="380" cy="360" r="120" fill="#EC4899" opacity="0.25" filter="url(#glow)"/>
+  
+  <!-- Chat bubble principal -->
+  <g transform="translate(256, 240)">
+    <!-- Bolha principal -->
+    <path
+      d="M -120 -60 
+         C -120 -100, -90 -130, -40 -130 
+         L 80 -130 
+         C 130 -130, 150 -100, 150 -60 
+         L 150 20 
+         C 150 60, 130 90, 80 90 
+         L 0 90 
+         L -40 130 
+         L -40 90 
+         L -60 90 
+         C -110 90, -130 60, -130 20 
+         L -130 -60 
+         C -130 -100, -110 -130, -60 -130 Z"
+      fill="url(#bubbleGradient)"
+      filter="url(#glow)"
+    />
+    
+    <!-- Setas de código dentro da bolha -->
+    <g opacity="0.9">
+      <!-- < -->
+      <path
+        d="M -30 -40 L -70 -10 L -30 20"
+        stroke="url(#mainGradient)"
+        stroke-width="18"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"
+      />
+      
+      <!-- > -->
+      <path
+        d="M 30 -40 L 70 -10 L 30 20"
+        stroke="url(#mainGradient)"
+        stroke-width="18"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"
+      />
+    </g>
+  </g>
+  
+  <!-- Notificação badge -->
+  <circle cx="390" cy="120" r="45" fill="#10B981" opacity="0.95"/>
+  <circle cx="390" cy="120" r="35" fill="white"/>
+  <text x="390" y="135" text-anchor="middle" font-size="40" font-weight="bold" fill="#10B981">1</text>
+</svg>

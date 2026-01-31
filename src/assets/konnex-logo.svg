@@ -1,0 +1,42 @@
+<svg width="2000" height="500" viewBox="0 0 2000 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="konnexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ícone (gigante) -->
+  <g transform="translate(80,100) scale(5)">
+    <path
+      d="M20 10C9 10 0 17.5 0 27.5C0 37.5 9 45 20 45H24L36 55V45H40C51 45 60 37.5 60 27.5C60 17.5 51 10 40 10H20Z"
+      fill="url(#konnexGradient)"
+    />
+    <path
+      d="M26 18L14 27.5L26 37"
+      stroke="white"
+      stroke-width="4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M34 18L46 27.5L34 37"
+      stroke="white"
+      stroke-width="4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </g>
+
+  <!-- Texto (gigante) -->
+  <text
+    x="500"
+    y="330"
+    font-size="240"
+    font-weight="700"
+    font-family="Inter, system-ui, sans-serif"
+    fill="url(#konnexGradient)"
+  >
+    Konnex
+  </text>
+</svg>
