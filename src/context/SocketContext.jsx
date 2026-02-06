@@ -42,6 +42,10 @@ export const SocketProvider = ({ children }) => {
 
 const SOCKET_URL = import.meta.env.VITE_SOCKET_URL;
 
+console.log('🔍 SOCKET_URL:', SOCKET_URL);
+console.log('🔍 Token:', token);
+console.log('🔍 Tentando conectar...');
+
 const newSocket = io(SOCKET_URL, {
   auth: {
     token
@@ -61,6 +65,7 @@ const newSocket = io(SOCKET_URL, {
 
 
     const handleConnect = () => {
+      console.log('✅ CONECTADO! Socket ID:', newSocket.id);
       setConnected(true);
       setError(null);
     };
@@ -77,6 +82,8 @@ const newSocket = io(SOCKET_URL, {
     };
 
     const handleConnectError = (err) => {
+      console.error('❌ ERRO DE CONEXÃO:', err.message);
+  console.error('❌ Detalhes:', err);
       
       if (err.message.includes('Autenticação') || 
           err.message.includes('Token') || 
